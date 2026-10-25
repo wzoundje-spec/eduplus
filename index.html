@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta name="google-site-verification" content="UTSJRgubVCHIcjvqpYhemhC6KOn6NkSUwbUJLD3Vum4" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDUKA-PLUS - Soutien Scolaire d'Excellence & Cours en Direct</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f3ff',
+                            100: '#e0e7ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                            dark: '#0f172a'
+                        },
+                        gold: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:ital,wght@0,400;0,700;1,300&display=swap" rel="stylesheet">
+    <!-- MathJax for Math Rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(229, 231, 235, 0.6);
+        }
+        .dark .glass-card {
+            background: rgba(15, 23, 42, 0.88);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(51, 65, 85, 0.6);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 50%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 min-h-screen flex flex-col antialiased">
+
+    <!-- Navigation / Header -->
+    <header class="sticky top-0 z-40 w-full glass-card border-b border-slate-200 dark:border-slate-800 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('accueil')">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-700 via-brand-500 to-gold-500 flex items-center justify-center text-white shadow-lg shadow-brand-500/30">
+                        <i class="fa-solid fa-graduation-cap text-2xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-lg font-extrabold tracking-tight block text-brand-900 dark:text-white leading-none">EDUKA - PLUS</span>
+                        <span class="text-[10px] font-semibold text-gold-500 tracking-wider uppercase">Tél: 01 53 51 88 34 • FB: Leo Avtn</span>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                    <button onclick="switchTab('accueil')" class="px-3 py-2 rounded-xl text-sm font-semibold text-brand-600 dark:text-brand-400 bg-brand-50 dark:bg-slate-800 transition-all cursor-pointer">
+                        <i class="fa-solid fa-house mr-1.5"></i>Accueil
+                    </button>
+                    <button onclick="switchTab('cours')" class="px-3 py-2 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-brand-600 transition-all cursor-pointer">
+                        <i class="fa-solid fa-book-open mr-1.5"></i>Cours & Quiz (6e - 3e)
+                    </button>
+                    <button onclick="switchTab('docs')" class="px-3 py-2 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-brand-600 transition-all cursor-pointer">
+                        <i class="fa-solid fa-file-pdf mr-1.5 text-brand-500"></i>Documentation & PDF <i class="fa-solid fa-lock text-[10px] text-amber-500 ml-1"></i>
+                    </button>
+                    <button onclick="switchTab('live')" class="px-3 py-2 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-brand-600 transition-all cursor-pointer">
+                        <i class="fa-solid fa-video mr-1.5 text-red-500"></i>Visio & Direct <i class="fa-solid fa-lock text-[10px] text-amber-500 ml-1"></i>
+                    </button>
+                    <button onclick="switchTab('tarifs')" class="px-3 py-2 rounded-xl text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-brand-600 transition-all cursor-pointer">
+                        <i class="fa-solid fa-ticket mr-1.5 text-gold-500"></i>Abonnements
+                    </button>
+                    <button onclick="switchTab('admin')" class="px-3 py-2 rounded-xl text-sm font-bold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-slate-800 transition-all cursor-pointer">
+                        <i class="fa-solid fa-user-shield mr-1.5"></i>Panel Auteur
+                    </button>
+                    <!-- Bouton Connexion / Déconnexion Dynamique -->
+                    <button id="nav-auth-btn" onclick="switchTab('login')" class="px-3 py-2 rounded-xl text-sm font-bold text-brand-600 dark:text-brand-400 transition-all bg-brand-50 dark:bg-slate-800 cursor-pointer">
+                        <i class="fa-solid fa-key mr-1.5"></i>Connexion Membre
+                    </button>
+                </nav>
+
+                <!-- Actions -->
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <button id="theme-toggle" class="p-2.5 rounded-xl bg-slate-200/70 dark:bg-slate-800 text-slate-700 dark:text-slate-200 cursor-pointer">
+                        <i id="theme-icon" class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- VIEW 1: ACCUEIL -->
+        <section id="view-accueil" class="view-section space-y-12">
+            <div class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-brand-900 via-brand-800 to-slate-900 text-white p-8 sm:p-12 lg:p-16 shadow-2xl border border-brand-700/30">
+                <div class="absolute -right-10 -bottom-10 w-80 h-80 bg-gold-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="relative z-10 space-y-6 max-w-2xl">
+                    <div class="inline-flex items-center space-x-2 bg-gold-500 text-slate-950 font-extrabold rounded-full px-4 py-1.5 text-xs sm:text-sm shadow-md animate-pulse">
+                        <i class="fa-solid fa-bolt text-red-600"></i>
+                        <span>LE LIVRE DES MEILLEURES MATHÉMATIQUES</span>
+                    </div>
+                    <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
+                        Maîtrisez les Mathématiques avec <span class="gradient-text">EDUKA-PLUS</span>
+                    </h1>
+                    <p class="text-slate-200 text-base sm:text-lg leading-relaxed">
+                        Conçu par <strong>M. Avitin Sagbo Léonard</strong>, découvrez notre collection officielle d'ouvrages et nos sessions de cours en direct.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <a href="https://wa.me/2290153518834?text=Bonjour%20M.%20Avitin,%20je%20souhaite%20avoir%20des%20informations%20sur%20EDUKA-PLUS." target="_blank" class="bg-emerald-600 hover:bg-emerald-700 transition-all backdrop-blur-md p-3.5 rounded-2xl border border-emerald-400/40 flex items-center space-x-3 shadow-lg cursor-pointer">
+                            <div class="w-9 h-9 rounded-xl bg-white text-emerald-600 flex items-center justify-center text-lg shadow-md flex-shrink-0">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div class="overflow-hidden">
+                                <span class="text-[9px] font-bold text-emerald-100 uppercase tracking-wider block">Commandes & Infos WhatsApp</span>
+                                <span class="text-xs font-black text-white">01 53 51 88 34</span>
+                            </div>
+                        </a>
+                        <a href="https://www.facebook.com" target="_blank" class="bg-blue-600 hover:bg-blue-700 transition-all backdrop-blur-md p-3.5 rounded-2xl border border-blue-400/40 flex items-center space-x-3 shadow-lg cursor-pointer">
+                            <div class="w-9 h-9 rounded-xl bg-white text-blue-600 flex items-center justify-center text-lg shadow-md flex-shrink-0">
+                                <i class="fa-brands fa-facebook-f"></i>
+                            </div>
+                            <div class="overflow-hidden">
+                                <span class="text-[9px] font-bold text-blue-100 uppercase tracking-wider block">Facebook Officiel</span>
+                                <span class="text-xs font-black text-white">Leo Avtn</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <button onclick="switchTab('cours')" class="px-6 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold shadow-lg transition-all flex items-center space-x-2 cursor-pointer">
+                            <i class="fa-solid fa-book-open"></i>
+                            <span>Accéder aux Cours & Quiz</span>
+                        </button>
+                        <button onclick="switchTab('tarifs')" class="px-6 py-3.5 rounded-xl bg-gold-500 hover:bg-gold-600 text-slate-950 font-extrabold shadow-lg transition-all flex items-center space-x-2 cursor-pointer">
+                            <i class="fa-solid fa-ticket"></i>
+                            <span>Voir les Abonnements</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Galerie des Ouvrages & Prix Officiels -->
+            <div class="space-y-6 pt-6">
+                <div class="text-center space-y-2">
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">Découvrez nos Ouvrages Officiels & Tarifs</h2>
+                    <p class="text-slate-500 text-sm">Le livre de référence et ses déclinaisons par classe au programme officiel.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- 6ème -->
+                    <div class="glass-card p-4 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-3 shadow-lg flex flex-col justify-between">
+                        <div class="overflow-hidden rounded-2xl shadow-md bg-white">
+                            <img src="Livre 6é .jpeg" alt="Livre 6ème" class="w-full h-auto object-cover transform hover:scale-105 transition-all duration-300">
+                        </div>
+                        <div class="text-center space-y-1.5">
+                            <h3 class="font-bold text-sm text-slate-900 dark:text-white">Édition Spéciale 6ème</h3>
+                            <div class="text-brand-600 dark:text-brand-400 font-extrabold text-base">2 500 F</div>
+                            <button onclick="orderBook('6ème', '2 500 F')" class="w-full py-2 bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs rounded-xl shadow transition-all cursor-pointer">
+                                <i class="fa-brands fa-whatsapp mr-1"></i> Commander (2500F)
+                            </button>
+                        </div>
+                    </div>
+                    <!-- 5ème -->
+                    <div class="glass-card p-4 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-3 shadow-lg flex flex-col justify-between">
+                        <div class="overflow-hidden rounded-2xl shadow-md bg-white">
+                            <img src="Livre 5é .jpeg" alt="Livre 5ème" class="w-full h-auto object-cover transform hover:scale-105 transition-all duration-300">
+                        </div>
+                        <div class="text-center space-y-1.5">
+                            <h3 class="font-bold text-sm text-slate-900 dark:text-white">Édition Spéciale 5ème</h3>
+                            <div class="text-brand-600 dark:text-brand-400 font-extrabold text-base">3 000 F</div>
+                            <button onclick="orderBook('5ème', '3 000 F')" class="w-full py-2 bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs rounded-xl shadow transition-all cursor-pointer">
+                                <i class="fa-brands fa-whatsapp mr-1"></i> Commander (3000F)
+                            </button>
+                        </div>
+                    </div>
+                    <!-- 4ème -->
+                    <div class="glass-card p-4 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-3 shadow-lg flex flex-col justify-between">
+                        <div class="overflow-hidden rounded-2xl shadow-md bg-white">
+                            <img src="Livre .jpeg" alt="Livre Général" class="w-full h-auto object-cover transform hover:scale-105 transition-all duration-300">
+                        </div>
+                        <div class="text-center space-y-1.5">
+                            <h3 class="font-bold text-sm text-slate-900 dark:text-white">Édition Spéciale 4ème</h3>
+                            <div class="text-gold-600 font-extrabold text-base">3 500 F</div>
+                            <button onclick="orderBook('4ème', '3 500 F')" class="w-full py-2 bg-gold-500 hover:bg-gold-600 text-slate-950 font-bold text-xs rounded-xl shadow transition-all cursor-pointer">
+                                <i class="fa-brands fa-whatsapp mr-1"></i> Commander (3500F)
+                            </button>
+                        </div>
+                    </div>
+                    <!-- 3ème -->
+                    <div class="glass-card p-4 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-3 shadow-lg flex flex-col justify-between">
+                        <div class="overflow-hidden rounded-2xl shadow-md bg-white">
+                            <img src="derriere livre .jpeg" alt="Livre 3ème" class="w-full h-auto object-cover transform hover:scale-105 transition-all duration-300">
+                        </div>
+                        <div class="text-center space-y-1.5">
+                            <h3 class="font-bold text-sm text-slate-900 dark:text-white">Édition Spéciale 3ème</h3>
+                            <div class="text-gold-600 font-extrabold text-base">4 000 F</div>
+                            <button onclick="orderBook('3ème', '4 000 F')" class="w-full py-2 bg-gold-500 hover:bg-gold-600 text-slate-950 font-bold text-xs rounded-xl shadow transition-all cursor-pointer">
+                                <i class="fa-brands fa-whatsapp mr-1"></i> Commander (4000F)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 2: COURS & QUIZ -->
+        <section id="view-cours" class="view-section hidden space-y-8">
+            <div class="border-b border-slate-200 dark:border-slate-800 pb-6 flex justify-between items-center flex-wrap gap-4">
+                <div>
+                    <h1 class="text-3xl font-extrabold text-slate-900 dark:text-white">Bibliothèque de Cours & Quiz (6e - 3e)</h1>
+                    <p class="text-slate-500 text-sm mt-1">Cours complets interactifs avec rendu MathJax et autocorrection immédiate.</p>
+                </div>
+                <div class="flex gap-2 flex-wrap">
+                    <button onclick="filterCourses('tous')" class="px-4 py-2 bg-brand-600 text-white font-bold text-xs rounded-xl shadow cursor-pointer">Tous</button>
+                    <button onclick="filterCourses('6e')" class="px-4 py-2 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs rounded-xl shadow cursor-pointer">6ème</button>
+                    <button onclick="filterCourses('5e')" class="px-4 py-2 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs rounded-xl shadow cursor-pointer">5ème</button>
+                    <button onclick="filterCourses('4e')" class="px-4 py-2 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs rounded-xl shadow cursor-pointer">4ème</button>
+                    <button onclick="filterCourses('3e')" class="px-4 py-2 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs rounded-xl shadow cursor-pointer">3ème</button>
+                </div>
+            </div>
+
+            <div class="space-y-10" id="courses-container">
+                <!-- COURS 6E -->
+                <div class="course-card glass-card p-8 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-6 shadow-xl" data-level="6e">
+                    <div class="flex justify-between items-center flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-extrabold rounded-full">Classe de 6ème</span>
+                        <span class="text-xs font-semibold text-slate-400"><i class="fa-solid fa-calculator mr-1"></i> Arithmétique</span>
+                    </div>
+                    <h2 class="text-2xl font-black text-brand-600 dark:text-brand-400">Entiers Naturels & Opérations</h2>
+                    <div class="text-sm text-slate-600 dark:text-slate-300 space-y-4 leading-relaxed">
+                        <p>L'ensemble des entiers naturels est noté $\mathbb{N} = \{0, 1, 2, 3, 4, ...\}$. Division euclidienne de $a$ par $b$ :</p>
+                        <div class="p-4 bg-brand-50 dark:bg-slate-800/80 rounded-2xl border border-brand-200 dark:border-slate-700 text-center font-serif text-lg">
+                            $$a = b \times q + r \quad (\text{avec } 0 \le r < b)$$
+                        </div>
+                    </div>
+                    <div class="p-6 bg-slate-100 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-4">
+                        <h4 class="font-bold text-sm text-slate-900 dark:text-white flex items-center">
+                            <i class="fa-solid fa-circle-question text-gold-500 mr-2"></i> Quiz : Quel est le reste de la division euclidienne de 37 par 5 ?
+                        </h4>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <button onclick="checkQuiz(this, false, 'q6_1', 'Incorrect. $37 = 5 \times 7 + 2$.')" class="py-2 px-3 bg-white dark:bg-slate-700 hover:bg-brand-50 rounded-xl text-xs font-bold border border-slate-300 dark:border-slate-600 cursor-pointer">A) 0</button>
+                            <button onclick="checkQuiz(this, true, 'q6_1', 'Exact ! $37 = 5 \times 7 + 2$, le reste est 2.')" class="py-2 px-3 bg-white dark:bg-slate-700 hover:bg-brand-50 rounded-xl text-xs font-bold border border-slate-300 dark:border-slate-600 cursor-pointer">B) 2</button>
+                            <button onclick="checkQuiz(this, false, 'q6_1', 'Incorrect. C’est 2.')" class="py-2 px-3 bg-white dark:bg-slate-700 hover:bg-brand-700 rounded-xl text-xs font-bold border border-slate-300 dark:border-slate-600 cursor-pointer">C) 3</button>
+                            <button onclick="checkQuiz(this, false, 'q6_1', 'Incorrect. C’est 2.')" class="py-2 px-3 bg-white dark:bg-slate-700 hover:bg-brand-700 rounded-xl text-xs font-bold border border-slate-300 dark:border-slate-600 cursor-pointer">D) 4</button>
+                        </div>
+                        <div id="feedback-q6_1" class="text-xs font-semibold mt-2 hidden"></div>
+                    </div>
+                </div>
+
+                <!-- COURS 5E -->
+                <div class="course-card glass-card p-8 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-6 shadow-xl" data-level="5e">
+                    <div class="flex justify-between items-center flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-extrabold rounded-full">Classe de 5ème</span>
+                        <span class="text-xs font-semibold text-slate-400"><i class="fa-solid fa-plus-minus mr-1"></i> Nombres Relatifs</span>
+                    </div>
+                    <h2 class="text-2xl font-black text-brand-600 dark:text-brand-400">Entiers & Nombres Décimaux Relatifs</h2>
+                    <div class="text-sm text-slate-600 dark:text-slate-300 space-y-4 leading-relaxed">
+                        <p>L'ensemble $\mathbb{Z}$ regroupe les entiers relatifs. Règle d'addition de deux nombres de même signe négatif :</p>
+                        <div class="p-4 bg-brand-50 dark:bg-slate-800/80 rounded-2xl border border-brand-200 dark:border-slate-700 text-center font-serif text-lg">
+                            $$(-a) + (-b) = -(a + b)$$
+                        </div>
+                    </div>
+                    <div class="p-6 bg-slate-100 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-4">
+                        <h4 class="font-bold text-sm text-slate-900 dark:text-white flex items-center">
+                            <i class="fa-solid fa-circle-question text-gold-500 mr-2"></i> Quiz : Calculez $(-12) + (+5)$.
+                        </h4>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <button onclick="checkQuiz(this, true, 'q5_1', 'Exact ! $-12 + 5 = -7$.')" class="py-2 px-3 bg-white dark:bg-slate-700 hover:bg-brand-50 rounded-xl text-xs font-bold border border-slate-300 dark:border-slate-600 cursor-pointer">A) -7</button>
+                            <button onclick="checkQuiz(this, false, 'q5_1', 'Incorrect. C’est -7.')" class="py-2 px-3 bg-white dark:bg-slate-700 hover:bg-brand-50 rounded-xl text-xs font-bold border border-slate-300 dark:border-slate-600 cursor-pointer">B) +7</button>
+                            <button onclick="checkQuiz(this, false, 'q5_1', 'Incorrect. C’est -7.')" class="py-2 px-3 bg-white dark:bg-slate-700 hover:bg-brand-700 rounded-xl text-xs font-bold border border-slate-300 dark:border-slate-600 cursor-pointer">C) -17</button>
+                            <button onclick="checkQuiz(this, false, 'q5_1', 'Incorrect. C’est -7.')" class="py-2 px-3 bg-white dark:bg-slate-700 hover:bg-brand-700 rounded-xl text-xs font-bold border border-slate-300 dark:border-slate-600 cursor-pointer">D) +17</button>
+                        </div>
+                        <div id="feedback-q5_1" class="text-xs font-semibold mt-2 hidden"></div>
+                    </div>
+                </div>
+
+                <!-- COURS 4E -->
+                <div class="course-card glass-card p-8 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-6 shadow-xl" data-level="4e">
+                    <div class="flex justify-between items-center flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-amber-100 text-amber-700 text-xs font-extrabold rounded-full">Classe de 4ème</span>
+                        <span class="text-xs font-semibold text-slate-400"><i class="fa-solid fa-superscript mr-1"></i> Puissances & Rationnels</span>
+                    </div>
+                    <h2 class="text-2xl font-black text-brand-600 dark:text-brand-400">Puissances de 10 & Nombres Rationnels</h2>
+                    <div class="text-sm text-slate-600 dark:text-slate-300 space-y-4 leading-relaxed">
+                        <p>Pour tout entier $n$, $10^n$ est le produit de $n$ facteurs égaux à 10. Propriété fondamentale :</p>
+                        <div class="p-4 bg-brand-50 dark:bg-slate-800/80 rounded-2xl border border-brand-200 dark:border-slate-700 text-center font-serif text-lg">
+                            $$10^n \times 10^m = 10^{n+m}$$
+                        </div>
+                    </div>
+                    <div class="p-6 bg-slate-100 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-4">
+                        <h4 class="font-bold text-sm text-slate-900 dark:text-white flex items-center">
+                            <i class="fa-solid fa-circle-question text-gold-500 mr-2"></i> Quiz : Simplifiez $10^4 \times 10^{-2}$.
+                        </h4>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <button onclick="checkQuiz(this, false, 'q4_1', 'Incorrect. $4 + (-2) = 2$.')" class="py-2 px-3 bg-white dark:bg-slate-700 hover:bg-brand-50 rounded-xl text-xs font-bold border border-slate-300 dark:border-slate-600 cursor-pointer">A) $10^{-8}$</button>
+                            <button onclick="checkQuiz(this, true, 'q4_1', 'Exact ! $10^{4 + (-2)} = 10^2$.')" class="py-2 px-3 bg-white dark:bg-slate-700 hover:bg-brand-50 rounded-xl text-xs font-bold border border-slate-300 dark:border-slate-600 cursor-pointer">B) $10^2$</button>
+                            <button onclick="checkQuiz(this, false, 'q4_1', 'Incorrect. C’est $10^2$.')" class="py-2 px-3 bg-white dark:bg-slate-700 hover:bg-brand-700 rounded-xl text-xs font-bold border border-slate-300 dark:border-slate-600 cursor-pointer">C) $10^{-2}$</button>
+                            <button onclick="checkQuiz(this, false, 'q4_1', 'Incorrect. C’est $10^2$.')" class="py-2 px-3 bg-white dark:bg-slate-700 hover:bg-brand-700 rounded-xl text-xs font-bold border border-slate-300 dark:border-slate-600 cursor-pointer">D) $10^8$</button>
+                        </div>
+                        <div id="feedback-q4_1" class="text-xs font-semibold mt-2 hidden"></div>
+                    </div>
+                </div>
+
+                <!-- COURS 3E -->
+                <div class="course-card glass-card p-8 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-6 shadow-xl" data-level="3e">
+                    <div class="flex justify-between items-center flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-red-100 text-red-700 text-xs font-extrabold rounded-full">Classe de 3ème</span>
+                        <span class="text-xs font-semibold text-slate-400"><i class="fa-solid fa-calculator mr-1"></i> Théorème de Pythagore</span>
+                    </div>
+                    <h2 class="text-2xl font-black text-brand-600 dark:text-brand-400">Le Théorème de Pythagore et sa Réciproque</h2>
+                    <div class="text-sm text-slate-600 dark:text-slate-300 space-y-4 leading-relaxed">
+                        <p>Dans un triangle rectangle, le carré de l'hypoténuse est égal à la somme des carrés des deux autres côtés.</p>
+                        <div class="p-4 bg-brand-50 dark:bg-slate-800/80 rounded-2xl border border-brand-200 dark:border-slate-700 text-center font-serif text-lg">
+                            $$BC^2 = AB^2 + AC^2$$
+                        </div>
+                    </div>
+                    <div class="p-6 bg-slate-100 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-4">
+                        <h4 class="font-bold text-sm text-slate-900 dark:text-white flex items-center">
+                            <i class="fa-solid fa-circle-question text-gold-500 mr-2"></i> Quiz : Calculez l'hypoténuse $BC$ sachant que $AB = 6$ et $AC = 8$.
+                        </h4>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <button onclick="checkQuiz(this, false, 'pyth', 'Incorrect. $BC = \\sqrt{36 + 64} = 10$.')" class="py-2 px-3 bg-white dark:bg-slate-700 hover:bg-brand-50 rounded-xl text-xs font-bold border border-slate-300 dark:border-slate-600 cursor-pointer">A) 7</button>
+                            <button onclick="checkQuiz(this, true, 'pyth', 'Exact ! $BC = \\sqrt{36 + 64} = \\sqrt{100} = 10$.')" class="py-2 px-3 bg-white dark:bg-slate-700 hover:bg-brand-50 rounded-xl text-xs font-bold border border-slate-300 dark:border-slate-600 cursor-pointer">B) 10</button>
+                            <button onclick="checkQuiz(this, false, 'pyth', 'Incorrect. La réponse est 10.')" class="py-2 px-3 bg-white dark:bg-slate-700 hover:bg-brand-700 rounded-xl text-xs font-bold border border-slate-300 dark:border-slate-600 cursor-pointer">C) 14</button>
+                            <button onclick="checkQuiz(this, false, 'pyth', 'Incorrect. La réponse est 10.')" class="py-2 px-3 bg-white dark:bg-slate-700 hover:bg-brand-700 rounded-xl text-xs font-bold border border-slate-300 dark:border-slate-600 cursor-pointer">D) 48</button>
+                        </div>
+                        <div id="feedback-pyth" class="text-xs font-semibold mt-2 hidden"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 3: DOCUMENTATION & PDF (PROTÉGÉ ABONNÉ) -->
+        <section id="view-docs" class="view-section hidden space-y-8">
+            <div class="border-b border-slate-200 dark:border-slate-800 pb-6 flex justify-between items-center flex-wrap gap-4">
+                <div>
+                    <h1 class="text-3xl font-extrabold text-slate-900 dark:text-white">Documentation, PDF & Vidéos</h1>
+                    <p class="text-xs text-brand-600 dark:text-brand-400 font-bold mt-1">Espace réservé aux abonnés et à l'administrateur</p>
+                </div>
+            </div>
+
+            <!-- Message d'Alerte si non membre -->
+            <div id="docs-lock-msg" class="glass-card p-10 rounded-3xl border border-amber-500 text-center space-y-5 shadow-xl">
+                <div class="w-16 h-16 rounded-2xl bg-amber-500 text-slate-950 flex items-center justify-center text-2xl mx-auto shadow-lg">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h3 class="text-2xl font-black text-slate-900 dark:text-white">Espace Réservé aux Membres Abonnés</h3>
+                <p class="text-sm text-slate-500 max-w-lg mx-auto leading-relaxed">
+                    Pour accéder à la documentation PDF et aux vidéos exclusives, vous devez disposer d'un identifiant et d'un mot de passe membre envoyés par l'administrateur après votre abonnement.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 pt-2">
+                    <button onclick="switchTab('login')" class="px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl text-xs shadow-md cursor-pointer">
+                        <i class="fa-solid fa-key mr-2"></i> Se connecter avec mes identifiants
+                    </button>
+                    <a href="https://wa.me/2290153518834?text=Bonjour%20M.%20Avitin,%20je%20souhaite%20obtenir%20mes%20identifiants%20membres%20pour%20accéder%20aux%20documents%20EDUKA-PLUS." target="_blank" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-md flex items-center gap-2 cursor-pointer">
+                        <i class="fa-brands fa-whatsapp text-base"></i> Contacter l'Admin sur WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <!-- Contenu Visible si Membre ou Admin Connecté -->
+            <div id="docs-member-content" class="space-y-8 hidden">
+                <div id="docs-admin-box" class="glass-card p-6 rounded-3xl border border-gold-500 space-y-4 shadow-xl bg-amber-50/50 dark:bg-slate-800/50 hidden">
+                    <h3 class="font-bold text-lg text-gold-600 dark:text-gold-400 flex items-center">
+                        <i class="fa-solid fa-cloud-arrow-up mr-2"></i> [Panel Admin] Publier un nouveau document PDF ou une vidéo
+                    </h3>
+                    <form onsubmit="handleUploadMedia(event)" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Titre du document</label>
+                            <input type="text" id="media-title" required placeholder="Ex: TD corrigé Géométrie 3e" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Type de média</label>
+                            <select id="media-type" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm">
+                                <option value="pdf">Fiche PDF</option>
+                                <option value="video">Vidéo de cours</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Sélectionner le fichier</label>
+                            <input type="file" id="media-file" required accept=".pdf,video/*" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100">
+                        </div>
+                        <div class="sm:col-span-3">
+                            <button type="submit" class="w-full py-3 rounded-xl bg-gold-500 hover:bg-gold-600 text-slate-950 font-extrabold text-xs shadow-md cursor-pointer">Publier sur la plateforme</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="font-bold text-lg text-slate-900 dark:text-white">Ressources disponibles pour les abonnés</h3>
+                    <div id="media-list-container" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 4: VISIO (PROTÉGÉ ABONNÉ) -->
+        <section id="view-live" class="view-section hidden space-y-8 max-w-4xl mx-auto">
+            <div class="border-b border-slate-200 dark:border-slate-800 pb-6 flex justify-between items-center flex-wrap gap-4">
+                <div>
+                    <h1 class="text-3xl font-extrabold text-slate-900 dark:text-white">Cours en Direct & Réunions Visio</h1>
+                    <p class="text-xs text-slate-500 mt-1">Espace réservé aux membres abonnés et à l'administrateur</p>
+                </div>
+            </div>
+
+            <!-- Message d'Alerte si non membre -->
+            <div id="live-lock-msg" class="glass-card p-10 rounded-3xl border border-amber-500 text-center space-y-5 shadow-xl">
+                <div class="w-16 h-16 rounded-2xl bg-amber-500 text-slate-950 flex items-center justify-center text-2xl mx-auto shadow-lg">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h3 class="text-2xl font-black text-slate-900 dark:text-white">Espace Réservé aux Membres Abonnés</h3>
+                <p class="text-sm text-slate-500 max-w-lg mx-auto leading-relaxed">
+                    Pour rejoindre les cours en direct et les permanences visio, vous devez disposer d'un identifiant membre fourni par l'administrateur après votre abonnement.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 pt-2">
+                    <button onclick="switchTab('login')" class="px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl text-xs shadow-md cursor-pointer">
+                        <i class="fa-solid fa-key mr-2"></i> Se connecter avec mes identifiants
+                    </button>
+                    <a href="https://wa.me/2290153518834?text=Bonjour%20M.%20Avitin,%20je%20souhaite%20obtenir%20mes%20identifiants%20pour%20accéder%20aux%20cours%20en%20direct%20EDUKA-PLUS." target="_blank" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-md flex items-center gap-2 cursor-pointer">
+                        <i class="fa-brands fa-whatsapp text-base"></i> Contacter l'Admin sur WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <!-- Contenu Visible si Membre ou Admin Connecté -->
+            <div id="live-member-content" class="space-y-8 hidden">
+                <div id="live-admin-box" class="glass-card p-6 rounded-3xl border border-gold-500 space-y-4 shadow-xl bg-amber-50/50 dark:bg-slate-800/50 hidden">
+                    <h3 class="font-bold text-lg text-gold-600 dark:text-gold-400 flex items-center">
+                        <i class="fa-solid fa-video mr-2"></i> [Panel Admin] Ajouter un lien de réunion (Meet, Zoom, WhatsApp...)
+                    </h3>
+                    <form onsubmit="handleAddMeeting(event)" class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Titre de la session</label>
+                            <input type="text" id="meet-title" required placeholder="Ex: Révision Brevet" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Plateforme</label>
+                            <select id="meet-platform" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-semibold">
+                                <option value="Google Meet">Google Meet</option>
+                                <option value="Zoom">Zoom</option>
+                                <option value="WhatsApp">WhatsApp Visio</option>
+                                <option value="Microsoft Teams">Microsoft Teams</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Lien URL</label>
+                            <input type="url" id="meet-url" required placeholder="https://..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-mono">
+                        </div>
+                        <div class="sm:col-span-4">
+                            <button type="submit" class="w-full py-3 rounded-xl bg-gold-500 hover:bg-gold-600 text-slate-950 font-extrabold text-xs shadow-md cursor-pointer">Publier le lien</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="font-bold text-lg text-slate-900 dark:text-white">Salons de Visio Actifs</h3>
+                    <div id="meetings-list-container" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 5: ADMIN -->
+        <section id="view-admin" class="view-section hidden space-y-8 max-w-4xl mx-auto">
+            <div class="border-b border-slate-200 dark:border-slate-800 pb-6 flex justify-between items-center flex-wrap gap-4">
+                <div>
+                    <h1 class="text-3xl font-extrabold text-slate-900 dark:text-white">Panneau Auteur & Gestion des Pass</h1>
+                    <p class="text-xs text-slate-500 mt-1">Gérez vos abonnés 1 mois et vos identifiants administrateur.</p>
+                </div>
+            </div>
+
+            <div class="glass-card p-8 rounded-3xl border border-indigo-300 dark:border-indigo-600/50 space-y-6 shadow-xl">
+                <h3 class="font-bold text-lg text-slate-900 dark:text-white flex items-center">
+                    <i class="fa-solid fa-key text-brand-600 mr-2"></i> Modifier vos identifiants Administrateur
+                </h3>
+                <form id="admin-config-form" onsubmit="handleUpdateAdminCreds(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Identifiant Admin</label>
+                        <input type="text" id="new-admin-user" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-mono">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Mot de Passe Admin</label>
+                        <input type="text" id="new-admin-pass" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-mono">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <button type="submit" class="w-full py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs shadow-md cursor-pointer">Enregistrer</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="glass-card p-8 rounded-3xl border border-amber-300 dark:border-amber-600/50 space-y-6 shadow-xl">
+                <h3 class="font-bold text-lg text-slate-900 dark:text-white flex items-center">
+                    <i class="fa-solid fa-user-plus text-gold-500 mr-2"></i> Créer un accès abonné (1 mois) à envoyer à l'élève
+                </h3>
+                <form id="gen-pass-form" onsubmit="handleGeneratePass(event)" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Nom de l'élève</label>
+                        <input type="text" id="gen-name" required placeholder="Ex: Kouton Marc" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Identifiant (ID)</label>
+                        <input type="text" id="gen-username" required placeholder="Ex: marc3e" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-mono">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Mot de passe</label>
+                        <input type="text" id="gen-password" required placeholder="Ex: pass2026" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-mono">
+                    </div>
+                    <div class="sm:col-span-3">
+                        <button type="submit" class="w-full py-3 rounded-xl bg-gold-500 hover:bg-gold-600 text-slate-950 font-extrabold text-xs shadow-md cursor-pointer">Générer l'accès abonné (30 Jours)</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="glass-card p-8 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-4">
+                <h3 class="font-bold text-lg text-slate-900 dark:text-white">Liste des Abonnés Actifs</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs">
+                        <thead>
+                            <tr class="border-b border-slate-200 dark:border-slate-700 text-slate-400">
+                                <th class="py-3 px-2">Élève</th>
+                                <th class="py-3 px-2">Identifiant</th>
+                                <th class="py-3 px-2">Date de création</th>
+                                <th class="py-3 px-2">Expiration</th>
+                                <th class="py-3 px-2 text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="subscribers-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 6: ABONNEMENTS -->
+        <section id="view-tarifs" class="view-section hidden space-y-8">
+            <div class="border-b border-slate-200 dark:border-slate-800 pb-6 text-center">
+                <h1 class="text-3xl font-extrabold text-slate-900 dark:text-white">Formules d'Abonnement Mensuel</h1>
+                <p class="text-slate-500 text-sm mt-1">Payez votre pass et recevez vos identifiants d'accès valables 1 mois directement sur WhatsApp.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="glass-card p-8 rounded-3xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between space-y-6">
+                    <div>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full">6ème & 5ème</span>
+                        <h3 class="text-2xl font-black text-slate-900 dark:text-white mt-4">Pass Junior</h3>
+                        <div class="text-4xl font-extrabold text-brand-600 dark:text-brand-400 my-4">4 000 FCFA <span class="text-xs text-slate-400 font-normal">/ mois</span></div>
+                    </div>
+                    <button onclick="subscribePlan('6ème et 5ème (4 000 FCFA)')" class="w-full py-3.5 rounded-xl bg-brand-600 text-white font-bold text-xs shadow cursor-pointer">Souscrire via WhatsApp</button>
+                </div>
+
+                <div class="glass-card p-8 rounded-3xl border-2 border-gold-500 flex flex-col justify-between space-y-6">
+                    <div>
+                        <span class="px-3 py-1 bg-gold-100 text-gold-700 text-xs font-bold rounded-full">4ème & 3ème</span>
+                        <h3 class="text-2xl font-black text-slate-900 dark:text-white mt-4">Pass Senior (Brevet)</h3>
+                        <div class="text-4xl font-extrabold text-gold-600 my-4">5 000 FCFA <span class="text-xs text-slate-400 font-normal">/ mois</span></div>
+                    </div>
+                    <button onclick="subscribePlan('4ème et 3ème (5 000 FCFA)')" class="w-full py-3.5 rounded-xl bg-gold-500 text-slate-950 font-bold text-xs shadow cursor-pointer">Souscrire via WhatsApp</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 7: CONNEXION / DECONNEXION -->
+        <section id="view-login" class="view-section hidden space-y-8 max-w-md mx-auto">
+            <div id="login-container-card" class="glass-card p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-6">
+                <div class="text-center space-y-2">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-600 text-white flex items-center justify-center text-2xl mx-auto shadow-lg shadow-brand-500/30">
+                        <i class="fa-solid fa-user-lock"></i>
+                    </div>
+                    <h1 class="text-2xl font-black text-slate-900 dark:text-white">Connexion Membre</h1>
+                    <p class="text-xs text-slate-500">Saisissez vos identifiants d'abonné ou administrateur.</p>
+                </div>
+
+                <form id="login-form" onsubmit="handleLogin(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Identifiant</label>
+                        <input type="text" id="login-id" required placeholder="Votre ID ou admin" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-mono">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Mot de Passe</label>
+                        <input type="password" id="login-pass" required placeholder="••••••••" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm">
+                    </div>
+                    <button type="submit" class="w-full py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-md cursor-pointer">Valider la connexion</button>
+                </form>
+            </div>
+
+            <!-- Carte de Déconnexion si connecté -->
+            <div id="logout-container-card" class="glass-card p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-6 text-center hidden">
+                <div class="w-16 h-16 rounded-2xl bg-emerald-600 text-white flex items-center justify-center text-2xl mx-auto shadow-lg">
+                    <i class="fa-solid fa-user-check"></i>
+                </div>
+                <h1 class="text-2xl font-black text-slate-900 dark:text-white">Session Active</h1>
+                <p id="logged-user-info" class="text-xs text-slate-500 font-semibold"></p>
+                <button onclick="handleLogout()" class="w-full py-3.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-sm shadow-md cursor-pointer">
+                    <i class="fa-solid fa-right-from-bracket mr-2"></i> Se déconnecter
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 text-sm mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center text-xs space-y-2">
+            <p>&copy; 2026 Professeur Avitin Sagbo Léonard - Tous droits réservés.</p>
+            <p>Contact : <a href="mailto:aviitinleonard61@gmail.com" class="underline text-brand-400">aviitinleonard61@gmail.com</a> • WhatsApp : <strong>01 53 51 88 34</strong> • Facebook : <strong>Leo Avtn</strong></p>
+        </div>
+    </footer>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-2xl text-sm font-medium">
+        <span id="toast-message">Action effectuée</span>
+    </div>
+
+    <script>
+        let adminUser = localStorage.getItem('eduka_admin_user') || 'admin';
+        let adminPass = localStorage.getItem('eduka_admin_pass') || 'admin2026';
+        let currentRole = localStorage.getItem('eduka_current_role') || null;
+        let currentName = localStorage.getItem('eduka_current_name') || '';
+        
+        let subscribers = JSON.parse(localStorage.getItem('eduka_subscribers')) || [];
+        
+        let mediaLibrary = JSON.parse(localStorage.getItem('eduka_media_library')) || [
+            { title: "Recueil d'Exercices Corrigés & Brevet (6e - 3e)", type: "pdf", url: "#", date: "2026-10-01" }
+        ];
+
+        let meetingsLibrary = JSON.parse(localStorage.getItem('eduka_meetings_library')) || [
+            { title: "Permanence WhatsApp & Questions-Réponses", platform: "WhatsApp", url: "https://wa.me/2290153518834", date: "2026-10-15" }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateAuthUI();
+            switchTab('accueil');
+            renderSubscribersTable();
+            renderMediaLibrary();
+            renderMeetingsLibrary();
+            
+            if(document.getElementById('new-admin-user')) {
+                document.getElementById('new-admin-user').value = adminUser;
+                document.getElementById('new-admin-pass').value = adminPass;
+            }
+
+            const themeToggle = document.getElementById('theme-toggle');
+            if(themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+        });
+
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+        }
+
+        function switchTab(viewId) {
+            const sections = document.querySelectorAll('.view-section');
+            sections.forEach(sec => sec.classList.add('hidden'));
+
+            const target = document.getElementById(`view-${viewId}`);
+            if (target) {
+                target.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                if (viewId === 'cours' && window.MathJax) {
+                    MathJax.typesetPromise();
+                }
+            }
+        }
+
+        function updateAuthUI() {
+            const authBtn = document.getElementById('nav-auth-btn');
+            const loginCard = document.getElementById('login-container-card');
+            const logoutCard = document.getElementById('logout-container-card');
+            const userInfo = document.getElementById('logged-user-info');
+            
+            const docsLock = document.getElementById('docs-lock-msg');
+            const docsMemberContent = document.getElementById('docs-member-content');
+            const docsAdminBox = document.getElementById('docs-admin-box');
+            
+            const liveLock = document.getElementById('live-lock-msg');
+            const liveMemberContent = document.getElementById('live-member-content');
+            const liveAdminBox = document.getElementById('live-admin-box');
+
+            if(currentRole) {
+                if(authBtn) authBtn.innerHTML = `<i class="fa-solid fa-right-from-bracket mr-1.5 text-red-400"></i> Déconnexion`;
+                if(loginCard) loginCard.classList.add('hidden');
+                if(logoutCard) logoutCard.classList.remove('hidden');
+
+                if(currentRole === 'admin') {
+                    if(userInfo) userInfo.innerText = `Connecté en tant qu'Administrateur (Auteur)`;
+                    if(docsAdminBox) docsAdminBox.classList.remove('hidden');
+                    if(liveAdminBox) liveAdminBox.classList.remove('hidden');
+                } else {
+                    if(userInfo) userInfo.innerText = `Connecté en tant que Membre Abonné : ${currentName}`;
+                    if(docsAdminBox) docsAdminBox.classList.add('hidden');
+                    if(liveAdminBox) liveAdminBox.classList.add('hidden');
+                }
+
+                if(docsLock) docsLock.classList.add('hidden');
+                if(docsMemberContent) docsMemberContent.classList.remove('hidden');
+
+                if(liveLock) liveLock.classList.add('hidden');
+                if(liveMemberContent) liveMemberContent.classList.remove('hidden');
+            } else {
+                if(authBtn) authBtn.innerHTML = `<i class="fa-solid fa-key mr-1.5"></i> Connexion Membre`;
+                if(loginCard) loginCard.classList.remove('hidden');
+                if(logoutCard) logoutCard.classList.add('hidden');
+
+                if(docsLock) docsLock.classList.remove('hidden');
+                if(docsMemberContent) docsMemberContent.classList.add('hidden');
+
+                if(liveLock) liveLock.classList.remove('hidden');
+                if(liveMemberContent) liveMemberContent.classList.add('hidden');
+            }
+        }
+
+        function filterCourses(level) {
+            const cards = document.querySelectorAll('.course-card');
+            cards.forEach(card => {
+                if(level === 'tous' || card.getAttribute('data-level') === level) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            if(window.MathJax) MathJax.typesetPromise();
+        }
+
+        function checkQuiz(button, isCorrect, quizId, explanation) {
+            const feedbackEl = document.getElementById(`feedback-${quizId}`);
+            feedbackEl.classList.remove('hidden');
+            
+            const parent = button.parentElement;
+            const buttons = parent.querySelectorAll('button');
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                btn.classList.add('opacity-60');
+            });
+
+            if(isCorrect) {
+                button.classList.remove('bg-white', 'dark:bg-slate-700');
+                button.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+                feedbackEl.innerHTML = `<span class="text-emerald-600 dark:text-emerald-400"><i class="fa-solid fa-circle-check mr-1"></i> Correct ! ${explanation}</span>`;
+            } else {
+                button.classList.remove('bg-white', 'dark:bg-slate-700');
+                button.classList.add('bg-red-600', 'text-white', 'border-red-600');
+                feedbackEl.innerHTML = `<span class="text-red-600 dark:text-red-400"><i class="fa-solid fa-circle-xmark mr-1"></i> ${explanation}</span>`;
+            }
+            if(window.MathJax) MathJax.typesetPromise();
+        }
+
+        function orderBook(level, price) {
+            const textMsg = `Bonjour M. Avitin, je souhaite commander l'ouvrage officiel EDUKA-PLUS Édition Spéciale ${level} au prix de ${price}.`;
+            window.open(`https://wa.me/2290153518834?text=${encodeURIComponent(textMsg)}`, '_blank');
+        }
+
+        function subscribePlan(planTitle) {
+            const textMsg = `Bonjour M. Avitin, je souhaite souscrire à la formule ${planTitle} sur EDUKA-PLUS pour obtenir mes identifiants d'accès.`;
+            window.open(`https://wa.me/2290153518834?text=${encodeURIComponent(textMsg)}`, '_blank');
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const idVal = document.getElementById('login-id').value.trim();
+            const passVal = document.getElementById('login-pass').value.trim();
+
+            if (idVal === adminUser && passVal === adminPass) {
+                currentRole = 'admin';
+                currentName = 'Administrateur';
+                localStorage.setItem('eduka_current_role', 'admin');
+                localStorage.setItem('eduka_current_name', currentName);
+                updateAuthUI();
+                showToast("Connexion Administrateur réussie !", "success");
+                document.getElementById('login-form').reset();
+                switchTab('admin');
+                return;
+            }
+
+            const foundSub = subscribers.find(sub => sub.user === idVal && sub.pass === passVal);
+            if (foundSub) {
+                currentRole = 'subscriber';
+                currentName = foundSub.name;
+                localStorage.setItem('eduka_current_role', 'subscriber');
+                localStorage.setItem('eduka_current_name', currentName);
+                updateAuthUI();
+                showToast(`Bienvenue ${foundSub.name} ! Connexion réussie.`, "success");
+                document.getElementById('login-form').reset();
+                switchTab('accueil');
+                return;
+            }
+
+            showToast("Identifiant ou mot de passe incorrect.");
+        }
+
+        function handleLogout() {
+            currentRole = null;
+            currentName = '';
+            localStorage.removeItem('eduka_current_role');
+            localStorage.removeItem('eduka_current_name');
+            updateAuthUI();
+            showToast("Vous avez été déconnecté avec succès.");
+            switchTab('accueil');
+        }
+
+        function handleUpdateAdminCreds(e) {
+            e.preventDefault();
+            const newUser = document.getElementById('new-admin-user').value.trim();
+            const newPass = document.getElementById('new-admin-pass').value.trim();
+
+            if(newUser && newPass) {
+                adminUser = newUser;
+                adminPass = newPass;
+                localStorage.setItem('eduka_admin_user', adminUser);
+                localStorage.setItem('eduka_admin_pass', adminPass);
+                showToast("Identifiants administrateur mis à jour avec succès !");
+            } else {
+                showToast("Veuillez remplir tous les champs.");
+            }
+        }
+
+        function handleGeneratePass(e) {
+            e.preventDefault();
+            const name = document.getElementById('gen-name').value.trim();
+            const user = document.getElementById('gen-username').value.trim();
+            const pass = document.getElementById('gen-password').value.trim();
+
+            const createdDate = new Date();
+            const expireDate = new Date();
+            expireDate.setMonth(expireDate.getMonth() + 1);
+
+            subscribers.push({
+                name: name,
+                user: user,
+                pass: pass,
+                created: createdDate.toISOString().split('T')[0],
+                expires: expireDate.toISOString().split('T')[0]
+            });
+
+            localStorage.setItem('eduka_subscribers', JSON.stringify(subscribers));
+            renderSubscribersTable();
+            document.getElementById('gen-pass-form').reset();
+            showToast(`Accès 1 mois généré pour ${name} !`);
+        }
+
+        function handleUploadMedia(e) {
+            e.preventDefault();
+            if(currentRole !== 'admin') {
+                showToast("Action réservée à l'administrateur.");
+                return;
+            }
+            const title = document.getElementById('media-title').value.trim();
+            const type = document.getElementById('media-type').value;
+            const fileInput = document.getElementById('media-file');
+
+            if(fileInput.files && fileInput.files[0]) {
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+
+                reader.onload = function(event) {
+                    const fileUrl = event.target.result;
+                    mediaLibrary.push({
+                        title: title,
+                        type: type,
+                        url: fileUrl,
+                        date: new Date().toISOString().split('T')[0]
+                    });
+
+                    localStorage.setItem('eduka_media_library', JSON.stringify(mediaLibrary));
+                    renderMediaLibrary();
+                    document.getElementById('media-file').value = '';
+                    document.getElementById('media-title').value = '';
+                    showToast(`Média "${title}" publié avec succès !`);
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function renderMediaLibrary() {
+            const container = document.getElementById('media-list-container');
+            if(!container) return;
+            container.innerHTML = '';
+
+            mediaLibrary.forEach((media, index) => {
+                const card = document.createElement('div');
+                card.className = 'glass-card p-6 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3 flex flex-col justify-between';
+                
+                let badgeClass = media.type === 'pdf' ? 'bg-brand-100 text-brand-700' : 'bg-red-100 text-red-700';
+                let iconClass = media.type === 'pdf' ? 'fa-file-pdf' : 'fa-video';
+                let actionBtn = media.type === 'pdf' ? 
+                    `<a href="${media.url}" download="${media.title}.pdf" class="w-full py-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold text-xs rounded-xl text-center block shadow cursor-pointer">Télécharger le PDF</a>` :
+                    `<a href="${media.url}" target="_blank" class="w-full py-2 bg-red-600 hover:bg-red-700 text-white font-semibold text-xs rounded-xl text-center block shadow cursor-pointer">Regarder la Vidéo</a>`;
+
+                let deleteBtnHtml = currentRole === 'admin' ? `<button onclick="deleteMedia(${index})" class="w-full py-1.5 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold text-[11px] rounded-xl cursor-pointer">Supprimer</button>` : '';
+
+                card.innerHTML = `
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="px-2.5 py-1 ${badgeClass} text-xs font-bold rounded-full uppercase"><i class="fa-solid ${iconClass} mr-1"></i> ${media.type}</span>
+                            <span class="text-[10px] text-slate-400">Ajouté le ${media.date}</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-900 dark:text-white">${media.title}</h3>
+                    </div>
+                    <div class="space-y-2 pt-2">
+                        ${actionBtn}
+                        ${deleteBtnHtml}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function deleteMedia(index) {
+            if(currentRole !== 'admin') return;
+            mediaLibrary.splice(index, 1);
+            localStorage.setItem('eduka_media_library', JSON.stringify(mediaLibrary));
+            renderMediaLibrary();
+            showToast("Ressource supprimée.");
+        }
+
+        function handleAddMeeting(e) {
+            e.preventDefault();
+            if(currentRole !== 'admin') {
+                showToast("Action réservée à l'administrateur.");
+                return;
+            }
+            const title = document.getElementById('meet-title').value.trim();
+            const platform = document.getElementById('meet-platform').value;
+            const url = document.getElementById('meet-url').value.trim();
+
+            meetingsLibrary.push({
+                title: title,
+                platform: platform,
+                url: url,
+                date: new Date().toISOString().split('T')[0]
+            });
+
+            localStorage.setItem('eduka_meetings_library', JSON.stringify(meetingsLibrary));
+            renderMeetingsLibrary();
+            document.getElementById('meet-title').value = '';
+            document.getElementById('meet-url').value = '';
+            showToast(`Salon visio "${title}" publié !`);
+        }
+
+        function renderMeetingsLibrary() {
+            const container = document.getElementById('meetings-list-container');
+            if(!container) return;
+            container.innerHTML = '';
+
+            meetingsLibrary.forEach((meet, index) => {
+                const card = document.createElement('div');
+                card.className = 'glass-card p-6 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3 flex flex-col justify-between';
+                
+                let badgeColor = 'bg-brand-100 text-brand-700';
+                if(meet.platform === 'WhatsApp') badgeColor = 'bg-emerald-100 text-emerald-700';
+                if(meet.platform === 'Zoom') badgeColor = 'bg-blue-100 text-blue-700';
+                if(meet.platform === 'Google Meet') badgeColor = 'bg-amber-100 text-amber-700';
+
+                let deleteBtnHtml = currentRole === 'admin' ? `<button onclick="deleteMeeting(${index})" class="w-full py-1.5 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold text-[11px] rounded-xl cursor-pointer">Supprimer</button>` : '';
+
+                card.innerHTML = `
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="px-2.5 py-1 ${badgeColor} text-xs font-bold rounded-full uppercase"><i class="fa-solid fa-video mr-1"></i> ${meet.platform}</span>
+                            <span class="text-[10px] text-slate-400">Créé le ${meet.date}</span>
+                        </div>
+                        <h3 class="font-bold text-lg text-slate-900 dark:text-white">${meet.title}</h3>
+                    </div>
+                    <div class="space-y-2 pt-2">
+                        <a href="${meet.url}" target="_blank" class="w-full py-2.5 bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs rounded-xl text-center block shadow-md cursor-pointer">
+                            <i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i> Rejoindre la réunion
+                        </a>
+                        ${deleteBtnHtml}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function deleteMeeting(index) {
+            if(currentRole !== 'admin') return;
+            meetingsLibrary.splice(index, 1);
+            localStorage.setItem('eduka_meetings_library', JSON.stringify(meetingsLibrary));
+            renderMeetingsLibrary();
+            showToast("Réunion supprimée.");
+        }
+
+        function renderSubscribersTable() {
+            const tbody = document.getElementById('subscribers-table-body');
+            if(!tbody) return;
+            tbody.innerHTML = '';
+
+            subscribers.forEach((sub, index) => {
+                const tr = document.createElement('tr');
+                tr.className = 'border-b border-slate-100 dark:border-slate-800';
+                tr.innerHTML = `
+                    <td class="py-3 px-2 font-bold">${sub.name}</td>
+                    <td class="py-3 px-2 font-mono text-brand-600">${sub.user} (Pass: ${sub.pass})</td>
+                    <td class="py-3 px-2">${sub.created}</td>
+                    <td class="py-3 px-2 text-gold-600 font-semibold">${sub.expires}</td>
+                    <td class="py-3 px-2 text-right">
+                        <button onclick="deleteSubscriber(${index})" class="px-2.5 py-1 bg-red-100 text-red-700 rounded-lg text-[11px] font-bold cursor-pointer">Supprimer</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function deleteSubscriber(index) {
+            subscribers.splice(index, 1);
+            localStorage.setItem('eduka_subscribers', JSON.stringify(subscribers));
+            renderSubscribersTable();
+            showToast("Abonné supprimé.");
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
